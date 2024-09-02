@@ -16,7 +16,7 @@ workspace "OpenGL3DGame"
         location "OpenGL3DGame"
         kind "ConsoleApp"
         language "C++"
-        staticruntime "On"
+        staticruntime "off"
 
         targetdir ("bin/" .. outputdir .. "/%{prj.name}/")
         objdir ("bin-int/" .. outputdir .. "/%{prj.name}/")
@@ -33,9 +33,15 @@ workspace "OpenGL3DGame"
             "vendor/include"
         }
 
+        libdirs
+        {
+            "vendor/lib"
+        }
+
         links 
         {
-
+            "glfw3",
+            "opengl32.lib"
         }
 
         filter "configurations:Debug"
