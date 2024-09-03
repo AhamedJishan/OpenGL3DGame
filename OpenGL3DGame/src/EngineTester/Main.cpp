@@ -4,16 +4,13 @@
 
 int main()
 {
-	OG3D::Window window(800, 800, "My Game");
-	window.Init();
+	OG3D::Window window(1920, 1080, "My Game");
 	
-	while (window.Update())
+	while (!window.IsCloseRequested())
 	{
 		// Running the main loop
+		window.Update();
 	}
 
 	window.Delete();
-
-	std::cout << "Press Any key to Exit!\n";
-	std::cin.get();
 }

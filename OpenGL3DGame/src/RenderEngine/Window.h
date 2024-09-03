@@ -10,9 +10,13 @@ namespace OG3D
 		Window(unsigned int width, unsigned int height, const char* title);
 		~Window();
 
-		bool Init();
-		bool Update();
+		void Update();
 		void Delete();
+
+		bool IsCloseRequested()
+		{
+			return glfwWindowShouldClose(m_Window);
+		}
 
 	private:
 		unsigned int m_Width, m_Height;
