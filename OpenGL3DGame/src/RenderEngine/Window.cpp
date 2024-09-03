@@ -1,5 +1,7 @@
-#include "Window.h"
 #include <iostream>
+
+#include "Window.h"
+#include <glad/glad.h>
 
 namespace OG3D
 {
@@ -11,7 +13,15 @@ namespace OG3D
 		m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, NULL, NULL);
 		if (!m_Window) std::cerr << "Failed to create Window\n";
 
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
 		glfwMakeContextCurrent(m_Window);
+
+		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+			std::cerr << "Failed to initialize GLAD" << std::endl;
+		}
 	}
 
 	Window::~Window()
@@ -21,9 +31,6 @@ namespace OG3D
 
 	void Window::Update()
 	{
-
-		glClearColor(.1f, .1f, .1f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
 		glfwSwapBuffers(m_Window);
 		glfwPollEvents();
 	}
