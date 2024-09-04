@@ -5,7 +5,7 @@
 #include "RenderEngine/Loader.h"
 #include "RenderEngine/Renderer.h"
 #include "RenderEngine/RawModel.h"
-
+#include "Shaders/Shader.h"
 using namespace OG3D;
 
 // set up vertex data (and buffer(s)) and configure vertex attributes
@@ -27,13 +27,15 @@ int main()
 
 	Loader loader;
 	Renderer renderer;
+	Shader shader("src/Shaders/VertexShader.vert", "src/Shaders/FragmentShader.frag");
 	
 	RawModel model = loader.LoadRawModel(positions, sizeof(positions) / (sizeof(float)), indices, sizeof(indices)/sizeof(unsigned int));
 
 	while (!window.IsCloseRequested())
 	{
 		renderer.Prepare();
-		
+
+		shader.Use();
 		renderer.Render(model);
 
 		window.Update();
