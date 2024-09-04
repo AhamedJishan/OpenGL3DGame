@@ -20,7 +20,7 @@ namespace OG3D
 		void Render(RawModel model)
 		{
 			glBindVertexArray(model.GetVaoID());
-			glDrawArrays(GL_TRIANGLES, 0, model.GetVertexCount());
+			glDrawElements(GL_TRIANGLES, model.GetIndicesCount(), GL_UNSIGNED_INT, 0);
 			glBindVertexArray(0);
 		}
 	};
