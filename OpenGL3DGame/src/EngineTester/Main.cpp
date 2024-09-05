@@ -7,16 +7,19 @@ int main()
 
 	Loader loader;
 	Renderer renderer;
+
 	Shader shader("src/Shaders/VertexShader.vert", "src/Shaders/FragmentShader.frag");
+	Texture texture = loader.LoadTexture("res/Textures/awesomeface.png");
 	
 	Quad quad;
 	RawModel model = loader.GenerateRawModel(quad);
-
+	  
 	while (!window.IsCloseRequested())
 	{
 		renderer.Prepare();
 
 		shader.Use();
+		texture.Use();
 		renderer.Render(model);
 
 		window.Update();

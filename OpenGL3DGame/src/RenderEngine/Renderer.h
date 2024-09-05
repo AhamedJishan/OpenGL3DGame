@@ -19,8 +19,6 @@ namespace OG3D
 
 		void Render(RawModel& model)
 		{
-			unsigned int a = model.GetVaoID();
-			unsigned int b = model.GetIndicesCount();
 			glBindVertexArray(model.GetVaoID());
 			glDrawElements(GL_TRIANGLES, model.GetIndicesCount(), GL_UNSIGNED_INT, 0);
 			glBindVertexArray(0);

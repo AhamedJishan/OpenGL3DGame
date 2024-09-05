@@ -2,9 +2,11 @@
 
 out vec4 Color;
 
-in vec3 color;
+in vec2 texCoords;
+
+uniform sampler2D textureSampler;
 
 void main()
 {
-	Color = vec4(color, 1.0);
+	Color = texture(textureSampler, texCoords);
 }
