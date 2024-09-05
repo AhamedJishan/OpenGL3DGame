@@ -1,7 +1,7 @@
 #pragma once
 
 #include <glad/glad.h>
-#include "RawModel.h"
+#include "Model/RawModel.h"
 
 namespace OG3D
 {

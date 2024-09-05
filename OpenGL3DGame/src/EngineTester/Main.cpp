@@ -1,11 +1,4 @@
-#include <iostream>
-#include <glad/glad.h>
-
-#include "RenderEngine/Window.h"
-#include "RenderEngine/Loader.h"
-#include "RenderEngine/Renderer.h"
-#include "RenderEngine/RawModel.h"
-#include "Shaders/Shader.h"
+#include "RenderEngine.h"
 using namespace OG3D;
 
 // set up vertex data (and buffer(s)) and configure vertex attributes

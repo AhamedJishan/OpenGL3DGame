@@ -1,6 +1,6 @@
 #pragma once
 
-#include "RawModel.h"
+#include "Model/RawModel.h"
 
 #include <glad/glad.h>
 
