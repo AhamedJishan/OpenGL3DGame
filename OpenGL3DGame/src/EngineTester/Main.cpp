@@ -22,7 +22,8 @@ int main()
 	Renderer renderer;
 	Shader shader("src/Shaders/VertexShader.vert", "src/Shaders/FragmentShader.frag");
 	
-	RawModel model = loader.LoadRawModel(positions, sizeof(positions) / (sizeof(float)), indices, sizeof(indices)/sizeof(unsigned int));
+	Quad quad;
+	RawModel model = loader.GenerateRawModel(quad);
 
 	while (!window.IsCloseRequested())
 	{

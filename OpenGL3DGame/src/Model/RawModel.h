@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glad/glad.h>
+#include "Model/Primitive.h"
 
 namespace OG3D
 {
@@ -11,6 +12,7 @@ namespace OG3D
 			: m_vaoID(vaoID), m_vboID(vboID), m_eboID(eboID), m_indicesCount(indicesCount)
 		{
 		}
+
 		~RawModel()
 		{
 			glDeleteBuffers(1, &m_eboID);
