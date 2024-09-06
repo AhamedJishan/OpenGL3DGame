@@ -1,11 +1,11 @@
 #pragma once
 
-#include <glad/glad.h>
-
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <iostream>
+
+#include <glad/glad.h>
 
 namespace OG3D
 {
@@ -80,6 +80,7 @@ namespace OG3D
         {
             glUseProgram(ID);
         }
+
         // utility uniform functions
         // ------------------------------------------------------------------------
         void SetBool(const std::string& name, bool value) const
@@ -95,6 +96,29 @@ namespace OG3D
         void SetFloat(const std::string& name, float value) const
         {
             glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
+        }
+        // ------------------------------------------------------------------------
+        void SetMat4(const std::string& name, glm::mat4& mat)
+        {
+            glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr(mat));
+        }
+        // ------------------------------------------------------------------------
+        void SetVec3(const std::string& name, float v1, float v2, float v3) const
+        {
+            glUniform3f(glGetUniformLocation(ID, name.c_str()), v1, v2, v3);
+        }
+        void SetVec3(const std::string& name, glm::vec3 value) const
+        {
+            glUniform3f(glGetUniformLocation(ID, name.c_str()), value.x, value.y, value.z);
+        }
+        // ------------------------------------------------------------------------
+        void SetVec2(const std::string& name, float v1, float v2) const
+        {
+            glUniform2f(glGetUniformLocation(ID, name.c_str()), v1, v2);
+        }
+        void SetVec2(const std::string& name, glm::vec2 value) const
+        {
+            glUniform2f(glGetUniformLocation(ID, name.c_str()), value.x, value.y);
         }
 
     private:

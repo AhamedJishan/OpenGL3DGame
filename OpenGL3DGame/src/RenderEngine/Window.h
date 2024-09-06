@@ -14,6 +14,8 @@ namespace OG3D
 		void Update();
 		void Delete();
 
+		float GetAspectRatio() { return (float)m_Width / (float)m_Height; }
+
 		bool IsCloseRequested()
 		{
 			return glfwWindowShouldClose(m_Window);
