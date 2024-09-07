@@ -22,6 +22,8 @@ namespace OG3D
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 			std::cerr << "Failed to initialize GLAD" << std::endl;
 		}
+
+		glEnable(GL_DEPTH_TEST);
 	}
 
 	Window::~Window()
