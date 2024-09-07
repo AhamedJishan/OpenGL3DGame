@@ -42,8 +42,11 @@ workspace "OpenGL3DGame"
         links 
         {
             "glfw3",
-            "opengl32.lib"
+            "opengl32.lib",
+            "assimp-vc143-mt"
         }
+
+        prebuildcommands { "{COPY} \"../vendor/bin/assimp/assimp-vc143-mt.dll\" \"../bin/" .. outputdir .. "/%{prj.name}/\"" }
 
         filter "configurations:Debug"
             defines "DEBUG"
