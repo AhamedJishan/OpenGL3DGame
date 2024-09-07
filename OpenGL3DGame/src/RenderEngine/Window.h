@@ -16,6 +16,8 @@ namespace OG3D
 
 		float GetAspectRatio() { return (float)m_Width / (float)m_Height; }
 
+		GLFWwindow* GetGlfwWindow() { return m_Window; }
+
 		bool IsCloseRequested()
 		{
 			return glfwWindowShouldClose(m_Window);

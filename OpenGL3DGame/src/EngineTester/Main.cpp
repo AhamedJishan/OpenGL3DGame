@@ -3,6 +3,9 @@
 
 using namespace OG3D;
 
+// Function identifiers ---------------------------
+void CameraMovement(Camera& camera, Window& window);
+
 int main()
 {
 	Window window(1280, 720, "My Game");
@@ -22,6 +25,8 @@ int main()
 	{
 		Time::Tick();
 
+		CameraMovement(camera, window);
+
 		renderer.Prepare();
 		
 		planeEntity.Rotate( glm::vec3(0.1f, 0.2f, 0.0f));
@@ -29,4 +34,30 @@ int main()
 
 		window.Update();
 	}
+}
+
+// Makes camera move from WASD keys
+void CameraMovement(Camera& camera, Window& window)
+{
+	float speed = 5 * Time::GetDeltaTime();
+
+	if (glfwGetKey(window.GetGlfwWindow(), GLFW_KEY_W) == GLFW_PRESS)
+	{
+		camera.Position += camera.Forward * speed;
+	}
+	if (glfwGetKey(window.GetGlfwWindow(), GLFW_KEY_A) == GLFW_PRESS)
+	{
+		camera.Position -= camera.Right * speed;
+	}
+	if (glfwGetKey(window.GetGlfwWindow(), GLFW_KEY_S) == GLFW_PRESS)
+	{
+		camera.Position -= camera.Forward * speed;
+	}
+	if (glfwGetKey(window.GetGlfwWindow(), GLFW_KEY_D) == GLFW_PRESS)
+	{
+		camera.Position += camera.Right * speed;
+	}
+
+	// Update the Camera ---------------------------------------------
+	camera.Update();
 }

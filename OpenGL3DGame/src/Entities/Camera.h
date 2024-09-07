@@ -28,7 +28,7 @@ namespace OG3D
 			Right = glm::normalize(glm::cross(Forward, Up));
 			Yaw = -90.0f;
 			Pitch = 0.0f;
-			UpdateCamera();
+			Update();
 		}
 		~Camera() = default;
 
@@ -37,8 +37,7 @@ namespace OG3D
 			return glm::lookAt(Position, Position + Forward, Up);
 		}
 
-	private:
-		void UpdateCamera()
+		void Update()
 		{
 			glm::vec3 direction;
 			direction.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
