@@ -1,7 +1,8 @@
 #include <iostream>
 
-#include "Window.h"
 #include <glad/glad.h>
+
+#include "Window.h"
 
 namespace OG3D
 {

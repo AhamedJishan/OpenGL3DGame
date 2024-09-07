@@ -1,4 +1,6 @@
 #include "Engine.h"
+#include <string>
+
 using namespace OG3D;
 
 int main()
@@ -18,9 +20,11 @@ int main()
 
 	while (!window.IsCloseRequested())
 	{
+		Time::Tick();
+
 		renderer.Prepare();
 		
-		planeEntity.Rotate( glm::vec3(0.0f, 0.05f, 0.0f) );
+		planeEntity.Rotate( glm::vec3(0.1f, 0.2f, 0.0f));
 		renderer.Render(planeEntity, shader, texture);
 
 		window.Update();
