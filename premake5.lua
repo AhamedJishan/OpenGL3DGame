@@ -25,6 +25,7 @@ workspace "OpenGL3DGame"
         {
             "%{prj.name}/src/**.h",
             "%{prj.name}/src/**.cpp",
+            "%{prj.name}/src/**.c"
         }
 
         includedirs
