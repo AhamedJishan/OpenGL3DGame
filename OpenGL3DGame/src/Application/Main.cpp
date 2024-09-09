@@ -16,6 +16,7 @@ int main()
 
 	Shader shader("src/Shaders/VertexShader.vert", "src/Shaders/FragmentShader.frag");
 
+	//Model flatScene(MONKEY);
 	Model flatScene("res/Models/FlatScene/FlatScene.obj");
 	Entity SceneEntity(flatScene);
 

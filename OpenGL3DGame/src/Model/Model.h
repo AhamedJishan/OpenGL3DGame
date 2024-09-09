@@ -150,6 +150,7 @@ namespace OG3D
 					texture.ID = LoadTextureFromFile(str.C_Str(), directory.c_str());
 					texture.type = typeName;
 					texture.path = str.C_Str();
+					textures.push_back(texture);
 					textures_loaded.push_back(texture);
 				}	
 			}

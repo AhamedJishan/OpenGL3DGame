@@ -4,6 +4,7 @@
 #include <string>
 
 #include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -13,6 +14,7 @@
 #include "RenderEngine/Loader.h"
 #include "RenderEngine/Renderer.h"
 
+#include "Model/Primitive.h"
 #include "Model/Model.h"
 
 #include "Shaders/Shader.h"
