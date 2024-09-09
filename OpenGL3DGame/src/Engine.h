@@ -14,12 +14,6 @@
 #include "RenderEngine/Renderer.h"
 
 #include "Model/Model.h"
-#include "Model/RawModel.h"
-#include "Model/Primitive.h"
-#include "Model/Quad.h"
-#include "Model/Triangle.h"
-#include "Model/Cube.h"
-
 
 #include "Shaders/Shader.h"
 #include "Entities/Entity.h"

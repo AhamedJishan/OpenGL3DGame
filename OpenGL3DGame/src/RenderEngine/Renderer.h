@@ -3,7 +3,6 @@
 #include <glad/glad.h>
 
 #include "Window.h"
-#include "Model/RawModel.h"
 #include "Shaders/Shader.h"
 #include "DataStructs/DataStructs.h"
 #include "Entities/Entity.h"
@@ -43,16 +42,6 @@ namespace OG3D
 			shader.SetMat4("projection", m_ProjectionMatrix);
 			
 			entity.GetModel().Draw(shader);
-		}
-
-		void Render(RawModel& model, Shader& shader, Texture& texture)
-		{
-			shader.Use();
-			glBindTexture(GL_TEXTURE_2D, texture.ID);
-
-			glBindVertexArray(model.GetVaoID());
-			glDrawElements(GL_TRIANGLES, model.GetIndicesCount(), GL_UNSIGNED_INT, 0);
-			glBindVertexArray(0);
 		}
 	};
 }
