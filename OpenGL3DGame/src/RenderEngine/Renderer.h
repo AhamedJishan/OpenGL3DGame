@@ -1,9 +1,11 @@
 #pragma once
 
 #include <glad/glad.h>
+
+#include "Window.h"
 #include "Model/RawModel.h"
 #include "Shaders/Shader.h"
-#include "Textures/Texture.h"
+#include "DataStructs/DataStructs.h"
 #include "Entities/Entity.h"
 #include "Entities/Camera.h"
 
@@ -33,23 +35,20 @@ namespace OG3D
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		}
 
-		void Render(Entity& entity, Shader& shader, Texture& texture)
+		void Render(Entity& entity, Shader& shader)
 		{
 			shader.Use();
 			shader.SetMat4("model", entity.GetModelMatrix());
 			shader.SetMat4("view", m_Camera.GetViewMatrix());
 			shader.SetMat4("projection", m_ProjectionMatrix);
-			texture.Use();
-
-			glBindVertexArray(entity.GetModel().GetVaoID());
-			glDrawElements(GL_TRIANGLES, entity.GetModel().GetIndicesCount(), GL_UNSIGNED_INT, 0);
-			glBindVertexArray(0);
+			
+			entity.GetModel().Draw(shader);
 		}
 
 		void Render(RawModel& model, Shader& shader, Texture& texture)
 		{
 			shader.Use();
-			texture.Use();
+			glBindTexture(GL_TEXTURE_2D, texture.ID);
 
 			glBindVertexArray(model.GetVaoID());
 			glDrawElements(GL_TRIANGLES, model.GetIndicesCount(), GL_UNSIGNED_INT, 0);

@@ -5,23 +5,11 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
+#include "DataStructs/DataStructs.h"
 #include "Shaders/Shader.h"
 
 namespace OG3D
 {
-	struct Vertex
-	{
-		glm::vec3 Position;
-		glm::vec3 Normal;
-		glm::vec2 TexCoords;
-	};
-
-	struct Texture
-	{
-		unsigned int ID;
-		const char* type;
-	};
-
 	class Mesh
 	{
 	public:
@@ -56,12 +44,14 @@ namespace OG3D
 					number = std::to_string(specularNr++);
 				}
 
+				name = name + number;
+
 				glActiveTexture(GL_TEXTURE0 + i);
-				shader.SetInt(("material." + name + number), i);
+				shader.SetInt(name, i);
 				glBindTexture(GL_TEXTURE_2D, textures[i].ID);
 			}
-
 			glActiveTexture(0);
+
 			glBindVertexArray(VAO);
 			glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 			glBindVertexArray(0);

@@ -3,14 +3,14 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "Model/RawModel.h"
+#include "Model/Model.h"
 
 namespace OG3D
 {
 	class Entity
 	{
 	public:
-		Entity(RawModel& model,
+		Entity(Model& model,
 			glm::vec3 position = glm::vec3(0.0f),
 			glm::vec3 rotation = glm::vec3(0.0f),
 			glm::vec3 scale = glm::vec3(1.0f))
@@ -25,7 +25,7 @@ namespace OG3D
 		const glm::vec3& GetRotation() const { return m_Rotation; }
 		const glm::vec3& GetScale() const { return m_Scale; }
 		glm::mat4& GetModelMatrix() { return m_ModelMatrix; }
-		const RawModel& GetModel() const { return m_Model; }
+		Model& GetModel() const { return m_Model; }
 
 		// Setters
 		void SetPosition(const glm::vec3& position) { m_Position = position;	Update(); }
@@ -48,7 +48,7 @@ namespace OG3D
 		}
 
 	private:
-		RawModel& m_Model;
+		Model& m_Model;
 		glm::vec3 m_Position, m_Rotation, m_Scale;
 		glm::mat4 m_ModelMatrix;
 	};

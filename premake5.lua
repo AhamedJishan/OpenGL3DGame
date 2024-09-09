@@ -31,7 +31,8 @@ workspace "OpenGL3DGame"
         includedirs
         {
             "%{prj.name}/src/",
-            "vendor/include"
+            "vendor/include",
+            "%{prj.name}/src/vendor"
         }
 
         libdirs
@@ -41,7 +42,7 @@ workspace "OpenGL3DGame"
 
         links 
         {
-            "glfw3",
+            "glfw3.lib",
             "opengl32.lib",
             "assimp-vc143-mt"
         }
@@ -56,4 +57,4 @@ workspace "OpenGL3DGame"
         filter "configurations:Release"
             defines "RELEASE"
             runtime "Release"
-            optimize "On"
+            optimize "full"

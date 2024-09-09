@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <string>
 
 #include <glad/glad.h>
 
@@ -12,6 +13,7 @@
 #include "RenderEngine/Loader.h"
 #include "RenderEngine/Renderer.h"
 
+#include "Model/Model.h"
 #include "Model/RawModel.h"
 #include "Model/Primitive.h"
 #include "Model/Quad.h"
