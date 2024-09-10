@@ -6,6 +6,13 @@
 
 namespace OG3D
 {
+	// Callback function to handle window resize
+	void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+	{
+		// Set the new viewport
+		glViewport(0, 0, width, height);
+	}
+
 	Window::Window(unsigned int width, unsigned int height, const char* title)
 		:m_Width(width), m_Height(height), m_Title(title)
 	{
@@ -20,9 +27,13 @@ namespace OG3D
 
 		glfwMakeContextCurrent(m_Window);
 
+
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 			std::cerr << "Failed to initialize GLAD" << std::endl;
 		}
+
+		// Register the framebuffer size callback function
+		glfwSetFramebufferSizeCallback(m_Window, framebuffer_size_callback);
 
 		glEnable(GL_DEPTH_TEST);
 	}
