@@ -18,6 +18,7 @@
 #include "Model/Model.h"
 
 #include "Shaders/Shader.h"
-#include "Entities/Entity.h"
 
+#include "Entities/Entity.h"
 #include "Entities/Time.h"
+#include "Entities/Light.h"

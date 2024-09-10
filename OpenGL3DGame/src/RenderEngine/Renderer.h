@@ -7,6 +7,7 @@
 #include "DataStructs/DataStructs.h"
 #include "Entities/Entity.h"
 #include "Entities/Camera.h"
+#include "Entities/Light.h"
 
 namespace OG3D
 {
@@ -34,12 +35,15 @@ namespace OG3D
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		}
 
-		void Render(Entity& entity, Shader& shader)
+		void Render(Entity& entity, Shader& shader, Light& light)
 		{
 			shader.Use();
 			shader.SetMat4("model", entity.GetModelMatrix());
 			shader.SetMat4("view", m_Camera.GetViewMatrix());
 			shader.SetMat4("projection", m_ProjectionMatrix);
+
+			shader.SetVec3("lightPos", light.Position);
+			shader.SetVec3("lightColor", light.Color);
 			
 			entity.GetModel().Draw(shader);
 		}

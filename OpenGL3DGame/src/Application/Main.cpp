@@ -8,7 +8,7 @@ void CameraMovement(Camera& camera, Window& window);
 
 int main()
 {
-	Window window(1280, 720, "My Game");
+	Window window(1920, 1080, "My Game");
 	Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 	Loader loader;
@@ -16,8 +16,10 @@ int main()
 
 	Shader shader("src/Shaders/VertexShader.vert", "src/Shaders/FragmentShader.frag");
 
-	//Model flatScene(MONKEY);
-	Model flatScene("res/Models/FlatScene/FlatScene.obj");
+	Light light(glm::vec3(-3.0f, 1.0f, 3.0f), glm::vec3(1.0f));
+
+	Model flatScene(PRIMITIVE_MONKEY);
+	//Model flatScene("res/Models/FlatScene/FlatScene.obj");
 	Entity SceneEntity(flatScene);
 
 	while (!window.IsCloseRequested())
@@ -29,7 +31,7 @@ int main()
 		renderer.Prepare();
 		
 		SceneEntity.Rotate( glm::vec3(0.0f, 0.05f, 0.0f));
-		renderer.Render(SceneEntity, shader);
+		renderer.Render(SceneEntity, shader, light);
 
 		window.Update();
 	}
@@ -38,7 +40,7 @@ int main()
 // Makes camera move from WASD keys
 void CameraMovement(Camera& camera, Window& window)
 {
-	float speed = 5 * Time::GetDeltaTime();
+	float speed = 2 * Time::GetDeltaTime();
 
 	if (glfwGetKey(window.GetGlfwWindow(), GLFW_KEY_W) == GLFW_PRESS)
 	{
@@ -55,6 +57,24 @@ void CameraMovement(Camera& camera, Window& window)
 	if (glfwGetKey(window.GetGlfwWindow(), GLFW_KEY_D) == GLFW_PRESS)
 	{
 		camera.Position += camera.Right * speed;
+	}
+
+	if (glfwGetKey(window.GetGlfwWindow(), GLFW_KEY_SPACE) == GLFW_PRESS)
+	{
+		camera.Position += camera.Up * speed;
+	}
+	if (glfwGetKey(window.GetGlfwWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
+	{
+		camera.Position -= camera.Up * speed;
+	}
+
+	if (glfwGetKey(window.GetGlfwWindow(), GLFW_KEY_LEFT) == GLFW_PRESS)
+	{
+		camera.Yaw -= speed*40;
+	}
+	if (glfwGetKey(window.GetGlfwWindow(), GLFW_KEY_RIGHT) == GLFW_PRESS)
+	{
+		camera.Yaw += speed*40;
 	}
 
 	// Update the Camera ---------------------------------------------
