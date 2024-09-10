@@ -9,10 +9,11 @@ namespace OG3D
 	public:
 		glm::vec3 Position;
 		glm::vec3 Color;
+		glm::vec3 Ambient;
 
 	public:
-		Light(glm::vec3 position, glm::vec3 color)
-			:Position(position), Color(color)
+		Light(glm::vec3 position, glm::vec3 color, glm::vec3 ambient)
+			:Position(position), Color(color), Ambient(ambient)
 		{
 
 		}

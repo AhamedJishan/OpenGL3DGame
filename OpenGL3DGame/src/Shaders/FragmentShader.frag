@@ -11,8 +11,9 @@ struct Material
 
 struct Light
 {
-	vec3 position;
 	vec3 color;
+	vec3 ambient;
+	vec3 position;
 };
 
 uniform sampler2D texture_diffuse1;
@@ -35,6 +36,9 @@ void main()
 	else
 		color = texture(texture_diffuse1, TexCoords).xyz;
 
+	// AMBIENT COLOR
+	vec3 ambientColor = light.ambient * color;
+
 	// DIFFUSE COLOR
 	vec3 normal = normalize(Normals);
 	vec3 lightDir = normalize(light.position - FragPos);
@@ -48,7 +52,7 @@ void main()
 	specularFactor *= max(min(material.reflectivity, 1.0), 0.0);
 	vec3 specularColor = material.specularColor * specularFactor * color;
 
-	color = diffuseColor + specularColor;
+	color = ambientColor + diffuseColor + specularColor;
 
 	Out_Color = vec4(color, 1.0);
 }

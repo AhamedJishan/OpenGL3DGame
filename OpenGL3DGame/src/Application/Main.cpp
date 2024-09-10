@@ -17,10 +17,10 @@ int main()
 	Shader shader("src/Shaders/VertexShader.vert", "src/Shaders/FragmentShader.frag");
 	Material material(glm::vec3(0.5f, 0.5f, 0.5f), 32.0f, 1.0f, shader);
 
-	Light light(glm::vec3(-3.0f, 1.0f, 3.0f), glm::vec3(1.0f));
+	Light light(glm::vec3(-3.0f, 1.0f, 3.0f), glm::vec3(1.0f), glm::vec3(0.15f));
 	renderer.AddLight(&light);
 
-	Model flatScene(PRIMITIVE_MONKEY);
+	Model flatScene(PRIMITIVE_CUBE);
 	//Model flatScene("res/Models/FlatScene/FlatScene.obj");
 	Entity SceneEntity(flatScene);
 

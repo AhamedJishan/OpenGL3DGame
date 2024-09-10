@@ -36,6 +36,7 @@ namespace OG3D
 		glfwSetFramebufferSizeCallback(m_Window, framebuffer_size_callback);
 
 		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_CULL_FACE);
 	}
 
 	Window::~Window()

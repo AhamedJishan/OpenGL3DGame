@@ -56,6 +56,7 @@ namespace OG3D
 			{
 				material.shader.SetVec3("light.position", m_Light->Position);
 				material.shader.SetVec3("light.color", m_Light->Color);
+				material.shader.SetVec3("light.ambient", m_Light->Ambient);
 			}
 			
 			entity.GetModel().Draw(material.shader);
