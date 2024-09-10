@@ -17,6 +17,7 @@
 #include "Model/Primitive.h"
 #include "Model/Model.h"
 
+#include "Entities/Material.h"
 #include "Shaders/Shader.h"
 
 #include "Entities/Entity.h"

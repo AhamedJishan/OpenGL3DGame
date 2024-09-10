@@ -2,14 +2,30 @@
 
 out vec4 Out_Color;
 
-in vec2 TexCoords;
-in vec3 FragPos;
-in vec3 Normals;
+struct Material
+{
+	vec3 specularColor;
+	float shineDamper;
+	float reflectivity;
+};
+
+struct Light
+{
+	vec3 position;
+	vec3 color;
+};
 
 uniform sampler2D texture_diffuse1;
 uniform bool useTexture;
-uniform vec3 lightPos;
-uniform vec3 lightColor;
+
+uniform Light light;
+uniform Material material;
+uniform vec3 viewPos;
+
+in vec2 TexCoords;
+in vec3 FragPos;
+//in vec3 ViewPos;
+in vec3 Normals;
 
 void main()
 {
@@ -19,11 +35,20 @@ void main()
 	else
 		color = texture(texture_diffuse1, TexCoords).xyz;
 
+	// DIFFUSE COLOR
 	vec3 normal = normalize(Normals);
-	vec3 lightDir = normalize(lightPos - FragPos);
+	vec3 lightDir = normalize(light.position - FragPos);
+	float diffuseFactor = max(dot(normal, lightDir), 0.0);
+	vec3 diffuseColor = light.color * (diffuseFactor * color);
 
-	float diffuse = max(dot(normal, lightDir), 0.0);
-	color = lightColor * color * diffuse;
+	// SPECULAR COLOR
+	vec3 viewDir = normalize(viewPos - FragPos);
+	vec3 reflectedDir = reflect(-lightDir, normal);
+	float specularFactor = pow(max(dot(viewDir, reflectedDir), 0.0), material.shineDamper);
+	specularFactor *= max(min(material.reflectivity, 1.0), 0.0);
+	vec3 specularColor = material.specularColor * specularFactor * color;
 
-	Out_Color = vec4(color, 1.0f);
+	color = diffuseColor + specularColor;
+
+	Out_Color = vec4(color, 1.0);
 }
