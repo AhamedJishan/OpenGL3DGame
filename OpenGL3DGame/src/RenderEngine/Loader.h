@@ -11,9 +11,22 @@ namespace OG3D
 {
 	class Loader
 	{
-	public:
+	private:
+		// Private constructor and destructor to prevent direct instantiation.
 		Loader() = default;
-		~Loader() = default;	
+		~Loader() = default;
+
+	public:
+		// Delete the copy constructor and assignment operator to prevent copying.
+		Loader(const Loader&) = delete;
+		Loader& operator=(const Loader&) = delete;
+
+		// Static method to provide access to the singleton instance.
+		static Loader& GetInstance()
+		{
+			static Loader instance; // Guaranteed to be lazy-initialized and destroyed.
+			return instance;
+		}
 
 		unsigned int LoadTexture(const char* filepath, bool shouldFlipVertically = false)
 		{

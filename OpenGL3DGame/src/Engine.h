@@ -20,6 +20,9 @@
 #include "Entities/Material.h"
 #include "Shaders/Shader.h"
 
+#include "Entities/TerrainEntity.h"
 #include "Entities/Entity.h"
 #include "Entities/Time.h"
 #include "Entities/Light.h"
+
+#include "Terrain/Terrain.h"
