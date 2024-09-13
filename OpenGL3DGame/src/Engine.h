@@ -26,3 +26,4 @@
 #include "Entities/Light.h"
 
 #include "Terrain/Terrain.h"
+#include "Terrain/FaultFormationTerrain.h"

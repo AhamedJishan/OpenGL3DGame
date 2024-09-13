@@ -21,11 +21,12 @@ namespace OG3D
 			}
 		}
 
-		void GenerateTerrain(const char* heightMapFilepath, int worldScale = 1);
+		void GenerateTerrain(const char* heightMapFilepath,float MinHeight, float MaxHeight);
 		TerrainMesh* GetTerrainMesh() { return m_terrainMesh; }
 
-	private:
+	protected:
 		int m_terrainSize = 0;
+		float m_minHeight, m_maxHeight;
 		std::vector<std::vector<float>> m_heightMap;
 		TerrainMesh* m_terrainMesh;
 

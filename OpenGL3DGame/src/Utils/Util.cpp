@@ -27,4 +27,30 @@ namespace OG3D
 
         return buffer;
     }
+
+    void Normalize2DArray(std::vector<std::vector<float>>& array2d, float minRange, float maxRange)
+    {
+        float min = array2d[0][0];
+        float max = array2d[0][1];
+
+        for (int x = 0; x < array2d.size(); x++)
+        {
+            for (int y = 0; y < array2d[0].size(); y++)
+            {
+                if (array2d[x][y] < min) min = array2d[x][y];
+                if (array2d[x][y] > max) max = array2d[x][y];
+            }
+        }
+
+        float minMaxDelta = max - min;
+        float minMaxRange = maxRange - minRange;
+
+        for (int x = 0; x < array2d.size(); x++)
+        {
+            for (int y = 0; y < array2d[0].size(); y++)
+            {
+                array2d[x][y] = (array2d[x][y] - min) / minMaxDelta * minMaxRange + minRange;
+            }
+        }
+    }
 }

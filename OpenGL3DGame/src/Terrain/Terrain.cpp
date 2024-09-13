@@ -6,10 +6,12 @@
 
 namespace OG3D
 {
-	void BaseTerrain::GenerateTerrain(const char* heightMapFilepath, int worldScale)
+	void BaseTerrain::GenerateTerrain(const char* heightMapFilepath,float MinHeight, float MaxHeight)
 	{
+		m_minHeight = MinHeight;
+		m_maxHeight = MaxHeight;
 		LoadHeightMapFromFile(heightMapFilepath);
-		m_terrainMesh = new TerrainMesh(m_heightMap, worldScale);
+		m_terrainMesh = new TerrainMesh(m_heightMap, m_minHeight, m_maxHeight);
 	}
 
 	void BaseTerrain::LoadHeightMapFromFile(const char* filepath)

@@ -12,16 +12,19 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
+uniform float minHeight;
+uniform float maxHeight;
+
 out vec3 color;
 
 void main()
 {
 	gl_Position = projection * view * model * vec4(aPos, 1.0);
 
-	color = vec3(aPos.y/ 200.0);
+	float minMaxHeightDelta = maxHeight - minHeight;
+	float heightRatio = (aPos.y-minHeight) / minMaxHeightDelta ;
 
-	//TexCoords = aTexCoords;
-	//FragPos = vec3(model * vec4(aPos, 1.0));
-	//Normals = mat3(transpose(inverse(model))) * aNormals;
-	//ViewPos = vec3(inverse(view) * vec4(0.0, 0.0, 0.0, 1.0));
+	float c = heightRatio * 0.9 + 0.1;
+
+	color = vec3(c);
 }

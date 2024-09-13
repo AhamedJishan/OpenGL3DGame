@@ -9,24 +9,29 @@ namespace OG3D
 	class TerrainMesh
 	{
 	public:
-		TerrainMesh(std::vector<std::vector<float>>& heightMap, int worldScale = 1)
+		TerrainMesh(std::vector<std::vector<float>>& heightMap, float MinHeight, float MaxHeight)
 		{
 			m_width = heightMap[0].size();
 			m_depth = heightMap.size();
-			m_worldScale = worldScale;
+			m_minHeight = MinHeight;
+			m_maxHeight = MaxHeight;
 			InitVertices(heightMap);
 			InitIndices();
 			SetupGlContext();
 		}
 
 		void Draw(Shader& shader);
+		
+		float GetMinHeight() { return m_minHeight; }
+		float GetMaxHeight() { return m_maxHeight; }
 
 	private:
 		std::vector<Vertex> m_vertices;
 		std::vector<unsigned int> m_indices;
 		int m_width;
 		int m_depth;
-		int m_worldScale;
+		float m_minHeight;
+		float m_maxHeight;
 
 		unsigned int VAO, VBO, EBO;
 

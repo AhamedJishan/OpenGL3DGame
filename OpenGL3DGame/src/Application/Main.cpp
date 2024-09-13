@@ -27,9 +27,11 @@ int main()
 	//Model flatScene("res/Models/FlatScene/FlatScene.obj");
 	Entity SceneEntity(flatScene);
 
-	BaseTerrain baseTerrain;
-	baseTerrain.GenerateTerrain("res/HeightMaps/heightmap.save", 4);
-	TerrainEntity terrain(baseTerrain);
+	//BaseTerrain baseTerrain;
+	//baseTerrain.GenerateTerrain("res/HeightMaps/heightmap.save", 0.0, 50.0);
+	FaultFormationTerrain faultFormationTerrain;
+	faultFormationTerrain.GenerateFaultFormationTerrain(256, 500, 0.0, 50.0);
+	TerrainEntity terrain(faultFormationTerrain);
 
 	glfwSetInputMode(window.GetGlfwWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	while (!window.IsCloseRequested())
@@ -41,7 +43,6 @@ int main()
 
 		renderer.Prepare();
 
-		terrain.SetScale(glm::vec3(0.1, 0.1, 0.1));
 		renderer.RenderTerrain(terrain, terrainMaterial);
 		
 		SceneEntity.Rotate( glm::vec3(0.0f, 0.05f, 0.0f));

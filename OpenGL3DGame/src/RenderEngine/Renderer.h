@@ -20,7 +20,7 @@ namespace OG3D
 	private:
 		const float FOV = 70.0f;
 		const float NEAR_PLANE = 0.1f;
-		const float FAR_PLANE = 200.0f;
+		const float FAR_PLANE = 300.0f;
 
 		// For now there is one light for the Renderer but later on there needs to be a list of lights
 		Light* m_Light;
@@ -69,7 +69,10 @@ namespace OG3D
 			material.shader.Use();
 			material.shader.SetMat4("model", terrain.GetModelMatrix());
 			material.shader.SetMat4("view", m_Camera.GetViewMatrix());
-			material.shader.SetMat4("projection", m_ProjectionMatrix);
+			material.shader.SetMat4("projection", m_ProjectionMatrix);	
+
+			material.shader.SetFloat("minHeight", terrain.GetTerrain().GetTerrainMesh()->GetMinHeight());
+			material.shader.SetFloat("maxHeight", terrain.GetTerrain().GetTerrainMesh()->GetMaxHeight());
 
 			//material.shader.SetVec3("viewPos", m_Camera.Position);
 			//

@@ -1,4 +1,5 @@
 #include "TerrainMesh.h"
+#include "Utils/Util.h"
 
 namespace OG3D
 {
@@ -6,13 +7,16 @@ namespace OG3D
 	{
 		m_vertices.resize(m_width * m_depth);
 
+		float minMaxHeightDelta = m_maxHeight - m_minHeight;
+		Normalize2DArray(heightMap, m_minHeight, m_maxHeight);
+
 		for (int z = 0; z < m_depth; z++)
 		{
 			for (int x = 0; x < m_width; x++)
 			{
-				m_vertices[m_width * z + x].Position.x = x * m_worldScale;
-				m_vertices[m_width * z + x].Position.y = (heightMap[z][x]);
-				m_vertices[m_width * z + x].Position.z = z * m_worldScale;
+				m_vertices[m_width * z + x].Position.x = x;
+				m_vertices[m_width * z + x].Position.y = heightMap[z][x];
+				m_vertices[m_width * z + x].Position.z = z;
 				m_vertices[m_width * z + x].Normal.x = 0.0f;
 				m_vertices[m_width * z + x].Normal.y = 1.0f;
 				m_vertices[m_width * z + x].Normal.z = 0.0f;
