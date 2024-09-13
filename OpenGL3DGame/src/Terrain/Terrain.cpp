@@ -6,9 +6,10 @@
 
 namespace OG3D
 {
-	void BaseTerrain::InitTerrain(const char* heightMapFilepath)
+	void BaseTerrain::GenerateTerrain(const char* heightMapFilepath, int worldScale)
 	{
 		LoadHeightMapFromFile(heightMapFilepath);
+		m_terrainMesh = new TerrainMesh(m_heightMap, worldScale);
 	}
 
 	void BaseTerrain::LoadHeightMapFromFile(const char* filepath)

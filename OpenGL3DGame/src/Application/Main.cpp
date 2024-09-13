@@ -5,6 +5,7 @@ using namespace OG3D;
 
 // Function identifiers ---------------------------
 void CameraMovement(Camera& camera, Window& window);
+void CameraLook(Camera& camera, Window& window);
 
 int main()
 {
@@ -26,14 +27,17 @@ int main()
 	//Model flatScene("res/Models/FlatScene/FlatScene.obj");
 	Entity SceneEntity(flatScene);
 
-	BaseTerrain baseTerrain("res/HeightMaps/heightmap.save", 4);
+	BaseTerrain baseTerrain;
+	baseTerrain.GenerateTerrain("res/HeightMaps/heightmap.save", 4);
 	TerrainEntity terrain(baseTerrain);
 
+	glfwSetInputMode(window.GetGlfwWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	while (!window.IsCloseRequested())
 	{
 		Time::Tick();
 
 		CameraMovement(camera, window);
+		CameraLook(camera, window);
 
 		renderer.Prepare();
 
@@ -82,23 +86,35 @@ void CameraMovement(Camera& camera, Window& window)
 		camera.Position -= camera.Up * speed;
 	}
 
-	if (glfwGetKey(window.GetGlfwWindow(), GLFW_KEY_UP) == GLFW_PRESS)
-	{
-		camera.Pitch += speed * 40;
-	}
-	if (glfwGetKey(window.GetGlfwWindow(), GLFW_KEY_DOWN) == GLFW_PRESS)
-	{
-		camera.Pitch -= speed * 40;
-	}
-	if (glfwGetKey(window.GetGlfwWindow(), GLFW_KEY_LEFT) == GLFW_PRESS)
-	{
-		camera.Yaw -= speed*40;
-	}
-	if (glfwGetKey(window.GetGlfwWindow(), GLFW_KEY_RIGHT) == GLFW_PRESS)
-	{
-		camera.Yaw += speed*40;
-	}
-
 	// Update the Camera ---------------------------------------------
+	camera.Update();
+}
+
+void CameraLook(Camera& camera, Window& window)
+{
+	float sensitivity = 0.1f;
+
+	double mouseX, mouseY;
+	glfwGetCursorPos(window.GetGlfwWindow(), &mouseX, &mouseY);
+
+	// Calculate the delta mouse movement
+	static double lastMouseX = mouseX, lastMouseY = mouseY;
+	double deltaX = mouseX - lastMouseX;
+	double deltaY = lastMouseY - mouseY; // reversed since y-coordinates go from bottom to top
+
+	// Store the current mouse position for the next frame
+	lastMouseX = mouseX;
+	lastMouseY = mouseY;
+
+	// Adjust yaw and pitch based on the mouse movement
+	camera.Yaw += deltaX * sensitivity;
+	camera.Pitch += deltaY * sensitivity;
+
+	// Constrain the pitch value to avoid flipping
+	if (camera.Pitch > 89.0f)
+		camera.Pitch = 89.0f;
+	if (camera.Pitch < -89.0f)
+		camera.Pitch = -89.0f;
+
 	camera.Update();
 }

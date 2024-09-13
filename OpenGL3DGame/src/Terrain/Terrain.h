@@ -10,12 +10,10 @@ namespace OG3D
 	class BaseTerrain
 	{
 	public:
-		BaseTerrain(const char* heightMapFile, int worldScale)
+		BaseTerrain()
 		{
-			InitTerrain(heightMapFile);
-			m_terrainMesh = new TerrainMesh(m_heightMap, worldScale);
 		}
-		~BaseTerrain()
+		virtual ~BaseTerrain()
 		{
 			if (m_terrainMesh != nullptr)
 			{
@@ -23,20 +21,14 @@ namespace OG3D
 			}
 		}
 
+		void GenerateTerrain(const char* heightMapFilepath, int worldScale = 1);
 		TerrainMesh* GetTerrainMesh() { return m_terrainMesh; }
 
-		glm::vec3 GetScale() { return m_scale; }
-		void SetScale(glm::vec3 scale) { m_scale = scale; }
-
 	private:
-		glm::vec3 m_scale;
 		int m_terrainSize = 0;
 		std::vector<std::vector<float>> m_heightMap;
 		TerrainMesh* m_terrainMesh;
 
-
-		void InitTerrain(const char* heightMapFilepath);
 		void LoadHeightMapFromFile(const char* filepath);
-		float GetHeight(int x, int z) { return m_heightMap[z][x]; }
 	};
 }
