@@ -24,7 +24,7 @@ void main()
 	float minMaxHeightDelta = maxHeight - minHeight;
 	float heightRatio = (aPos.y-minHeight) / minMaxHeightDelta ;
 
-	float c = heightRatio * 0.9 + 0.1;
+	float c = heightRatio * 0.8 + 0.1;
 
 	color = vec3(c);
 }

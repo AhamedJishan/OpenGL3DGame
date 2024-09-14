@@ -30,7 +30,7 @@ int main()
 	//BaseTerrain baseTerrain;
 	//baseTerrain.GenerateTerrain("res/HeightMaps/heightmap.save", 0.0, 50.0);
 	FaultFormationTerrain faultFormationTerrain;
-	faultFormationTerrain.GenerateFaultFormationTerrain(256, 500, 0.0, 50.0);
+	faultFormationTerrain.GenerateFaultFormationTerrain(256, 100, 0.0, 50.0, 0.8);
 	TerrainEntity terrain(faultFormationTerrain);
 
 	glfwSetInputMode(window.GetGlfwWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -58,7 +58,7 @@ void CameraMovement(Camera& camera, Window& window)
 	float speed = 2 * Time::GetDeltaTime();
 	if (glfwGetKey(window.GetGlfwWindow(), GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
 	{
-		speed = 10 * Time::GetDeltaTime();
+		speed = 20 * Time::GetDeltaTime();
 	}
 
 	if (glfwGetKey(window.GetGlfwWindow(), GLFW_KEY_W) == GLFW_PRESS)
