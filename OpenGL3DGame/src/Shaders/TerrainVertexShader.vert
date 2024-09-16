@@ -16,6 +16,7 @@ uniform float minHeight;
 uniform float maxHeight;
 
 out vec3 color;
+out vec2 texCoords;
 
 void main()
 {
@@ -27,4 +28,5 @@ void main()
 	float c = heightRatio * 0.8 + 0.1;
 
 	color = vec3(c);
+	texCoords = aTexCoords;
 }

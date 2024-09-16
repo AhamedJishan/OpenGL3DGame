@@ -1,5 +1,6 @@
 #include "TerrainMesh.h"
 #include "Utils/Util.h"
+#include "RenderEngine/Loader.h"
 
 namespace OG3D
 {
@@ -50,6 +51,16 @@ namespace OG3D
 			}
 		}
 	}
+
+	void TerrainMesh::InitTextures()
+	{
+		Loader& loader = Loader::GetInstance();
+		Texture texture;
+		texture.path = "res/Textures/GrassyGround.png";
+		texture.type = "texture_diffuse";
+		texture.ID = loader.LoadTexture(texture.path.c_str());
+	}
+
 	void TerrainMesh::SetupGlContext()
 	{
 		glGenVertexArrays(1, &VAO);
@@ -77,6 +88,8 @@ namespace OG3D
 	void TerrainMesh::Draw(Shader& shader)
 	{
 		glBindVertexArray(VAO);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, m_texture.ID);
 		glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, nullptr);
 		glBindVertexArray(0);
 	}

@@ -3,6 +3,7 @@
 #include <cstdlib>
 
 #include "Utils/Util.h"
+#include "Utils/Random.h"
 
 namespace OG3D
 {
@@ -106,14 +107,16 @@ namespace OG3D
 
 	void FaultFormationTerrain::GenRandomPoints(glm::vec2& p1, glm::vec2& p2)
 	{
-		p1.x = rand() % m_terrainSize;
-		p1.y = rand() % m_terrainSize;
+
+		Random& random = Random::GetInstance();
+		p1.x = random.RandomFloat(0.0f, m_terrainSize);
+		p1.y = random.RandomFloat(0.0f, m_terrainSize);
 
 		int counter = 0;
 		do
 		{
-			p2.x = rand() % m_terrainSize;
-			p2.y = rand() % m_terrainSize;
+			p2.x = random.RandomFloat(0.0f, m_terrainSize);
+			p2.y = random.RandomFloat(0.0f, m_terrainSize);
 
 			if (counter++ >= 100)
 			{

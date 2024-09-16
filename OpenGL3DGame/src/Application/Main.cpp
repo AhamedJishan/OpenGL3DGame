@@ -29,9 +29,11 @@ int main()
 
 	//BaseTerrain baseTerrain;
 	//baseTerrain.GenerateTerrain("res/HeightMaps/heightmap.save", 0.0, 50.0);
-	FaultFormationTerrain faultFormationTerrain;
-	faultFormationTerrain.GenerateFaultFormationTerrain(256, 100, 0.0, 50.0, 0.8);
-	TerrainEntity terrain(faultFormationTerrain);
+	//FaultFormationTerrain faultFormationTerrain;
+	//faultFormationTerrain.GenerateFaultFormationTerrain(256, 100, 0.0, 50.0, 0.8);
+	MidPointDispTerrain midPointDispTerrain;
+	midPointDispTerrain.GenerateMidPointDisplacement(64, 1.0f, 0.0, 10.0);
+	TerrainEntity terrain(midPointDispTerrain);
 
 	glfwSetInputMode(window.GetGlfwWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	while (!window.IsCloseRequested())

@@ -10,6 +10,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Utils/Random.h"
+
 #include "RenderEngine/Window.h"
 #include "RenderEngine/Loader.h"
 #include "RenderEngine/Renderer.h"
@@ -27,3 +29,4 @@
 
 #include "Terrain/Terrain.h"
 #include "Terrain/FaultFormationTerrain.h"
+#include "Terrain/MidPointDispTerrain.h"

@@ -17,6 +17,7 @@ namespace OG3D
 			m_maxHeight = MaxHeight;
 			InitVertices(heightMap);
 			InitIndices();
+			InitTextures();
 			SetupGlContext();
 		}
 
@@ -28,6 +29,7 @@ namespace OG3D
 	private:
 		std::vector<Vertex> m_vertices;
 		std::vector<unsigned int> m_indices;
+		Texture m_texture;
 		int m_width;
 		int m_depth;
 		float m_minHeight;
@@ -37,6 +39,7 @@ namespace OG3D
 
 		void InitVertices(std::vector<std::vector<float>>& heightMap);
 		void InitIndices();
+		void InitTextures();
 		void SetupGlContext();
 	};
 }

@@ -170,7 +170,6 @@ namespace OG3D
 
 		int width, height, nrComponents;
 
-		auto start = std::chrono::high_resolution_clock::now();
 		unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
 
 		if (data)
