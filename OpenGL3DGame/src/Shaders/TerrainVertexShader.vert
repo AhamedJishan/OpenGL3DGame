@@ -14,19 +14,15 @@ uniform mat4 projection;
 
 uniform float minHeight;
 uniform float maxHeight;
+uniform float textureTileSize;
 
-out vec3 color;
 out vec2 texCoords;
+out float height;
 
 void main()
 {
 	gl_Position = projection * view * model * vec4(aPos, 1.0);
 
-	float minMaxHeightDelta = maxHeight - minHeight;
-	float heightRatio = (aPos.y-minHeight) / minMaxHeightDelta ;
-
-	float c = heightRatio * 0.8 + 0.1;
-
-	color = vec3(c);
-	texCoords = aTexCoords;
+	texCoords = aTexCoords * textureTileSize;
+	height = (model * vec4(aPos, 1.0)).y;
 }

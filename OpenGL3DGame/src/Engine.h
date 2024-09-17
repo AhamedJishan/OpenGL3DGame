@@ -20,6 +20,7 @@
 #include "Model/Model.h"
 
 #include "Entities/Material.h"
+#include "Entities/TerrainMaterial.h"
 #include "Shaders/Shader.h"
 
 #include "Entities/TerrainEntity.h"

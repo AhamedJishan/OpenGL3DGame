@@ -6,6 +6,7 @@
 
 #include "Window.h"
 #include "Entities/Material.h"
+#include "Entities/TerrainMaterial.h"
 #include "DataStructs/DataStructs.h"
 #include "Entities/Entity.h"
 #include "Entities/TerrainEntity.h"
@@ -20,7 +21,7 @@ namespace OG3D
 	private:
 		const float FOV = 70.0f;
 		const float NEAR_PLANE = 0.1f;
-		const float FAR_PLANE = 300.0f;
+		const float FAR_PLANE = 1000.0f;
 
 		// For now there is one light for the Renderer but later on there needs to be a list of lights
 		Light* m_Light;
@@ -64,7 +65,7 @@ namespace OG3D
 			entity.GetModel().Draw(material.shader);
 		}
 
-		void RenderTerrain(TerrainEntity& terrain, Material& material)
+		void RenderTerrain(TerrainEntity& terrain, TerrainMaterial& material)
 		{
 			material.shader.Use();
 			material.shader.SetMat4("model", terrain.GetModelMatrix());
@@ -73,6 +74,15 @@ namespace OG3D
 
 			material.shader.SetFloat("minHeight", terrain.GetTerrain().GetTerrainMesh()->GetMinHeight());
 			material.shader.SetFloat("maxHeight", terrain.GetTerrain().GetTerrainMesh()->GetMaxHeight());
+			material.shader.SetFloat("textureTileSize", material.textureTileSize);
+
+			for (int i = 0; i < material.textures.size(); i++)
+			{
+				glActiveTexture(GL_TEXTURE0 + i);
+				glBindTexture(GL_TEXTURE_2D, material.textures[i].textureID);
+				material.shader.SetInt("terrainTexture" + std::to_string(i), i);
+				material.shader.SetFloat("textureHeight" + std::to_string(i), material.textures[i].height);
+			}
 
 			//material.shader.SetVec3("viewPos", m_Camera.Position);
 			//

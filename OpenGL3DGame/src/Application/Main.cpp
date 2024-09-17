@@ -13,12 +13,10 @@ int main()
 	Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 	Renderer renderer(camera, window);
+	Loader& loader = Loader::GetInstance();
 
 	Shader shader("src/Shaders/VertexShader.vert", "src/Shaders/FragmentShader.frag");
 	Material material(glm::vec3(0.5f, 0.5f, 0.5f), 32.0f, 1.0f, shader);
-
-	Shader terrainShader("src/Shaders/TerrainVertexShader.vert", "src/Shaders/TerrainFragmentShader.frag");
-	Material terrainMaterial(glm::vec3(0.5f, 0.5f, 0.5f), 32.0f, 1.0f, terrainShader);
 
 	Light light(glm::vec3(-3.0f, 1.0f, 3.0f), glm::vec3(1.0f), glm::vec3(0.15f));
 	renderer.AddLight(&light);
@@ -31,9 +29,18 @@ int main()
 	//baseTerrain.GenerateTerrain("res/HeightMaps/heightmap.save", 0.0, 50.0);
 	//FaultFormationTerrain faultFormationTerrain;
 	//faultFormationTerrain.GenerateFaultFormationTerrain(256, 100, 0.0, 50.0, 0.8);
+	float minHeight = 0.0f;
+	float maxHeight = 60.0f;
 	MidPointDispTerrain midPointDispTerrain;
-	midPointDispTerrain.GenerateMidPointDisplacement(64, 1.0f, 0.0, 10.0);
+	midPointDispTerrain.GenerateMidPointDisplacement(256, 1.1f, minHeight, maxHeight);
 	TerrainEntity terrain(midPointDispTerrain);
+	
+	Shader terrainShader("src/Shaders/TerrainVertexShader.vert", "src/Shaders/TerrainFragmentShader.frag");
+	TerrainMaterial terrainMaterial(terrainShader, 18.0f);
+	terrainMaterial.AddTextureTile(loader.LoadTexture("res/Textures/Terrain/ground_mud_d.jpg"), minHeight + 0.1 * (maxHeight-minHeight)/(float)4);
+	terrainMaterial.AddTextureTile(loader.LoadTexture("res/Textures/Terrain/grass_ground_d.jpg"), minHeight + 1 * (maxHeight - minHeight) / (float)4);
+	terrainMaterial.AddTextureTile(loader.LoadTexture("res/Textures/Terrain/mntn_dark_d.jpg"), minHeight + 2 * (maxHeight - minHeight) / (float)4);
+	terrainMaterial.AddTextureTile(loader.LoadTexture("res/Textures/Terrain/snow_mud_d.jpg"), minHeight + 3 * (maxHeight - minHeight) / (float)4);
 
 	glfwSetInputMode(window.GetGlfwWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	while (!window.IsCloseRequested())
