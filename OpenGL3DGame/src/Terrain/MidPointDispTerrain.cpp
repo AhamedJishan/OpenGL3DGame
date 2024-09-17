@@ -51,8 +51,8 @@ namespace OG3D
 				float bottomLeft = m_heightMap[next_y][x];
 				float bottomRight = m_heightMap[next_y][next_x];
 
-				int mid_x = x + halfRectSize;
-				int mid_y = y + halfRectSize;
+				int mid_x = (x + halfRectSize) % m_terrainSize;
+				int mid_y = (y + halfRectSize) % m_terrainSize;
 
 				float randValue = random.RandomFloat(HeightRange, -HeightRange);
 				float midPoint = (topLeft + topRight + bottomLeft + bottomRight) / 4.0f;
@@ -74,8 +74,8 @@ namespace OG3D
 				int next_x = (x + RectSize) % m_terrainSize;
 				int next_y = (y + RectSize) % m_terrainSize;
 
-				int mid_x = x + halfRectSize;
-				int mid_y = y + halfRectSize;
+				int mid_x = (x + halfRectSize) % m_terrainSize;
+				int mid_y = (y + halfRectSize) % m_terrainSize;
 				
 				int prev_mid_x = (x - halfRectSize + m_terrainSize) % m_terrainSize;
 				int prev_mid_y = (y - halfRectSize + m_terrainSize) % m_terrainSize;

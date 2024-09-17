@@ -36,11 +36,11 @@ int main()
 	TerrainEntity terrain(midPointDispTerrain);
 	
 	Shader terrainShader("src/Shaders/TerrainVertexShader.vert", "src/Shaders/TerrainFragmentShader.frag");
-	TerrainMaterial terrainMaterial(terrainShader, 18.0f);
+	TerrainMaterial terrainMaterial(terrainShader, 15.0f);
 	terrainMaterial.AddTextureTile(loader.LoadTexture("res/Textures/Terrain/ground_mud_d.jpg"), minHeight + 0.1 * (maxHeight-minHeight)/(float)4);
-	terrainMaterial.AddTextureTile(loader.LoadTexture("res/Textures/Terrain/grass_ground_d.jpg"), minHeight + 1 * (maxHeight - minHeight) / (float)4);
-	terrainMaterial.AddTextureTile(loader.LoadTexture("res/Textures/Terrain/mntn_dark_d.jpg"), minHeight + 2 * (maxHeight - minHeight) / (float)4);
-	terrainMaterial.AddTextureTile(loader.LoadTexture("res/Textures/Terrain/snow_mud_d.jpg"), minHeight + 3 * (maxHeight - minHeight) / (float)4);
+	terrainMaterial.AddTextureTile(loader.LoadTexture("res/Textures/Terrain/grass_ground_d.jpg"), minHeight + 2 * (maxHeight - minHeight) / (float)4);
+	terrainMaterial.AddTextureTile(loader.LoadTexture("res/Textures/Terrain/mntn_dark_d.jpg"), minHeight + 3 * (maxHeight - minHeight) / (float)4);
+	terrainMaterial.AddTextureTile(loader.LoadTexture("res/Textures/Terrain/snow_mud_d.jpg"), minHeight + 4 * (maxHeight - minHeight) / (float)4);
 
 	glfwSetInputMode(window.GetGlfwWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	while (!window.IsCloseRequested())
